@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package fileservice;
+
+option go_package = "github.com/zuhrulumam/grpc-file-upload/proto;proto";
+
+service FileService {
+    rpc Upload(stream UploadRequest) returns (UploadResponse);
+    rpc Download(DownloadRequest) returns (stream DownloadResponse);
+}
+
+message UploadRequest {
+    string filename = 1;
+    bytes chunks = 2;
+}
+
+message UploadResponse {
+    string filename = 1;
+    bool success = 2;
+}
+
+message DownloadRequest {
+    string filename = 1;
+}
+
+message DownloadResponse {
+    bytes chunks = 1;
+}
