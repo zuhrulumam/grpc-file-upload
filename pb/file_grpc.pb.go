@@ -2,9 +2,9 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v5.29.3
-// source: proto/file.proto
+// source: file.proto
 
-package proto
+package pb
 
 import (
 	context "context"
@@ -151,5 +151,5 @@ var FileService_ServiceDesc = grpc.ServiceDesc{
 			ServerStreams: true,
 		},
 	},
-	Metadata: "proto/file.proto",
+	Metadata: "file.proto",
 }

@@ -2,9 +2,9 @@
 // versions:
 // 	protoc-gen-go v1.36.6
 // 	protoc        v5.29.3
-// source: proto/file.proto
+// source: file.proto
 
-package proto
+package pb
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -31,7 +31,7 @@ type UploadRequest struct {
 
 func (x *UploadRequest) Reset() {
 	*x = UploadRequest{}
-	mi := &file_proto_file_proto_msgTypes[0]
+	mi := &file_file_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -43,7 +43,7 @@ func (x *UploadRequest) String() string {
 func (*UploadRequest) ProtoMessage() {}
 
 func (x *UploadRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_file_proto_msgTypes[0]
+	mi := &file_file_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -56,7 +56,7 @@ func (x *UploadRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UploadRequest.ProtoReflect.Descriptor instead.
 func (*UploadRequest) Descriptor() ([]byte, []int) {
-	return file_proto_file_proto_rawDescGZIP(), []int{0}
+	return file_file_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *UploadRequest) GetFilename() string {
@@ -83,7 +83,7 @@ type UploadResponse struct {
 
 func (x *UploadResponse) Reset() {
 	*x = UploadResponse{}
-	mi := &file_proto_file_proto_msgTypes[1]
+	mi := &file_file_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -95,7 +95,7 @@ func (x *UploadResponse) String() string {
 func (*UploadResponse) ProtoMessage() {}
 
 func (x *UploadResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_file_proto_msgTypes[1]
+	mi := &file_file_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -108,7 +108,7 @@ func (x *UploadResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UploadResponse.ProtoReflect.Descriptor instead.
 func (*UploadResponse) Descriptor() ([]byte, []int) {
-	return file_proto_file_proto_rawDescGZIP(), []int{1}
+	return file_file_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *UploadResponse) GetFilename() string {
@@ -134,7 +134,7 @@ type DownloadRequest struct {
 
 func (x *DownloadRequest) Reset() {
 	*x = DownloadRequest{}
-	mi := &file_proto_file_proto_msgTypes[2]
+	mi := &file_file_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -146,7 +146,7 @@ func (x *DownloadRequest) String() string {
 func (*DownloadRequest) ProtoMessage() {}
 
 func (x *DownloadRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_file_proto_msgTypes[2]
+	mi := &file_file_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -159,7 +159,7 @@ func (x *DownloadRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DownloadRequest.ProtoReflect.Descriptor instead.
 func (*DownloadRequest) Descriptor() ([]byte, []int) {
-	return file_proto_file_proto_rawDescGZIP(), []int{2}
+	return file_file_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *DownloadRequest) GetFilename() string {
@@ -178,7 +178,7 @@ type DownloadResponse struct {
 
 func (x *DownloadResponse) Reset() {
 	*x = DownloadResponse{}
-	mi := &file_proto_file_proto_msgTypes[3]
+	mi := &file_file_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -190,7 +190,7 @@ func (x *DownloadResponse) String() string {
 func (*DownloadResponse) ProtoMessage() {}
 
 func (x *DownloadResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_file_proto_msgTypes[3]
+	mi := &file_file_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -203,7 +203,7 @@ func (x *DownloadResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DownloadResponse.ProtoReflect.Descriptor instead.
 func (*DownloadResponse) Descriptor() ([]byte, []int) {
-	return file_proto_file_proto_rawDescGZIP(), []int{3}
+	return file_file_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *DownloadResponse) GetChunks() []byte {
@@ -213,11 +213,12 @@ func (x *DownloadResponse) GetChunks() []byte {
 	return nil
 }
 
-var File_proto_file_proto protoreflect.FileDescriptor
+var File_file_proto protoreflect.FileDescriptor
 
-const file_proto_file_proto_rawDesc = "" +
+const file_file_proto_rawDesc = "" +
 	"\n" +
-	"\x10proto/file.proto\x12\vfileservice\"C\n" +
+	"\n" +
+	"file.proto\x12\vfileservice\"C\n" +
 	"\rUploadRequest\x12\x1a\n" +
 	"\bfilename\x18\x01 \x01(\tR\bfilename\x12\x16\n" +
 	"\x06chunks\x18\x02 \x01(\fR\x06chunks\"F\n" +
@@ -230,28 +231,28 @@ const file_proto_file_proto_rawDesc = "" +
 	"\x06chunks\x18\x01 \x01(\fR\x06chunks2\x9d\x01\n" +
 	"\vFileService\x12C\n" +
 	"\x06Upload\x12\x1a.fileservice.UploadRequest\x1a\x1b.fileservice.UploadResponse(\x01\x12I\n" +
-	"\bDownload\x12\x1c.fileservice.DownloadRequest\x1a\x1d.fileservice.DownloadResponse0\x01B4Z2github.com/zuhrulumam/grpc-file-upload/proto;protob\x06proto3"
+	"\bDownload\x12\x1c.fileservice.DownloadRequest\x1a\x1d.fileservice.DownloadResponse0\x01B+Z)github.com/zuhrulumam/grpc-file-upload/pbb\x06proto3"
 
 var (
-	file_proto_file_proto_rawDescOnce sync.Once
-	file_proto_file_proto_rawDescData []byte
+	file_file_proto_rawDescOnce sync.Once
+	file_file_proto_rawDescData []byte
 )
 
-func file_proto_file_proto_rawDescGZIP() []byte {
-	file_proto_file_proto_rawDescOnce.Do(func() {
-		file_proto_file_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_proto_file_proto_rawDesc), len(file_proto_file_proto_rawDesc)))
+func file_file_proto_rawDescGZIP() []byte {
+	file_file_proto_rawDescOnce.Do(func() {
+		file_file_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_file_proto_rawDesc), len(file_file_proto_rawDesc)))
 	})
-	return file_proto_file_proto_rawDescData
+	return file_file_proto_rawDescData
 }
 
-var file_proto_file_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
-var file_proto_file_proto_goTypes = []any{
+var file_file_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_file_proto_goTypes = []any{
 	(*UploadRequest)(nil),    // 0: fileservice.UploadRequest
 	(*UploadResponse)(nil),   // 1: fileservice.UploadResponse
 	(*DownloadRequest)(nil),  // 2: fileservice.DownloadRequest
 	(*DownloadResponse)(nil), // 3: fileservice.DownloadResponse
 }
-var file_proto_file_proto_depIdxs = []int32{
+var file_file_proto_depIdxs = []int32{
 	0, // 0: fileservice.FileService.Upload:input_type -> fileservice.UploadRequest
 	2, // 1: fileservice.FileService.Download:input_type -> fileservice.DownloadRequest
 	1, // 2: fileservice.FileService.Upload:output_type -> fileservice.UploadResponse
@@ -263,26 +264,26 @@ var file_proto_file_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_proto_file_proto_init() }
-func file_proto_file_proto_init() {
-	if File_proto_file_proto != nil {
+func init() { file_file_proto_init() }
+func file_file_proto_init() {
+	if File_file_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_file_proto_rawDesc), len(file_proto_file_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_file_proto_rawDesc), len(file_file_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_proto_file_proto_goTypes,
-		DependencyIndexes: file_proto_file_proto_depIdxs,
-		MessageInfos:      file_proto_file_proto_msgTypes,
+		GoTypes:           file_file_proto_goTypes,
+		DependencyIndexes: file_file_proto_depIdxs,
+		MessageInfos:      file_file_proto_msgTypes,
 	}.Build()
-	File_proto_file_proto = out.File
-	file_proto_file_proto_goTypes = nil
-	file_proto_file_proto_depIdxs = nil
+	File_file_proto = out.File
+	file_file_proto_goTypes = nil
+	file_file_proto_depIdxs = nil
 }
