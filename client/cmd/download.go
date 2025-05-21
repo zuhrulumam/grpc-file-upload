@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"bufio"
 	"context"
 	"io"
 	"log"
@@ -36,6 +37,7 @@ func Download(filename, outputPath string) error {
 	}
 	defer file.Close()
 
+	writer := bufio.NewWriter(file)
 	bar := progressbar.Default(-1, "Downloading")
 
 	// write stream to created file
@@ -50,12 +52,14 @@ func Download(filename, outputPath string) error {
 		}
 
 		// write stream to file created
-		if _, err := file.Write(resp.Chunks); err != nil {
+		if _, err := writer.Write(resp.Chunks); err != nil {
 			return err
 		}
 
 		_ = bar.Add(len(resp.Chunks))
 	}
+
+	writer.Flush()
 
 	log.Println("Download completed.")
 

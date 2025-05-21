@@ -7,6 +7,7 @@
 package pb
 
 import (
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -213,12 +214,108 @@ func (x *DownloadResponse) GetChunks() []byte {
 	return nil
 }
 
+type UploadRequestSimple struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Filename      string                 `protobuf:"bytes,1,opt,name=filename,proto3" json:"filename,omitempty"`
+	File          []byte                 `protobuf:"bytes,2,opt,name=file,proto3" json:"file,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UploadRequestSimple) Reset() {
+	*x = UploadRequestSimple{}
+	mi := &file_file_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UploadRequestSimple) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UploadRequestSimple) ProtoMessage() {}
+
+func (x *UploadRequestSimple) ProtoReflect() protoreflect.Message {
+	mi := &file_file_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UploadRequestSimple.ProtoReflect.Descriptor instead.
+func (*UploadRequestSimple) Descriptor() ([]byte, []int) {
+	return file_file_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *UploadRequestSimple) GetFilename() string {
+	if x != nil {
+		return x.Filename
+	}
+	return ""
+}
+
+func (x *UploadRequestSimple) GetFile() []byte {
+	if x != nil {
+		return x.File
+	}
+	return nil
+}
+
+type DownloadRequestSimple struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Filename      string                 `protobuf:"bytes,1,opt,name=filename,proto3" json:"filename,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DownloadRequestSimple) Reset() {
+	*x = DownloadRequestSimple{}
+	mi := &file_file_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DownloadRequestSimple) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DownloadRequestSimple) ProtoMessage() {}
+
+func (x *DownloadRequestSimple) ProtoReflect() protoreflect.Message {
+	mi := &file_file_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DownloadRequestSimple.ProtoReflect.Descriptor instead.
+func (*DownloadRequestSimple) Descriptor() ([]byte, []int) {
+	return file_file_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *DownloadRequestSimple) GetFilename() string {
+	if x != nil {
+		return x.Filename
+	}
+	return ""
+}
+
 var File_file_proto protoreflect.FileDescriptor
 
 const file_file_proto_rawDesc = "" +
 	"\n" +
 	"\n" +
-	"file.proto\x12\vfileservice\"C\n" +
+	"file.proto\x12\vfileservice\x1a\x1cgoogle/api/annotations.proto\"C\n" +
 	"\rUploadRequest\x12\x1a\n" +
 	"\bfilename\x18\x01 \x01(\tR\bfilename\x12\x16\n" +
 	"\x06chunks\x18\x02 \x01(\fR\x06chunks\"F\n" +
@@ -228,10 +325,18 @@ const file_file_proto_rawDesc = "" +
 	"\x0fDownloadRequest\x12\x1a\n" +
 	"\bfilename\x18\x01 \x01(\tR\bfilename\"*\n" +
 	"\x10DownloadResponse\x12\x16\n" +
-	"\x06chunks\x18\x01 \x01(\fR\x06chunks2\x9d\x01\n" +
+	"\x06chunks\x18\x01 \x01(\fR\x06chunks\"E\n" +
+	"\x13UploadRequestSimple\x12\x1a\n" +
+	"\bfilename\x18\x01 \x01(\tR\bfilename\x12\x12\n" +
+	"\x04file\x18\x02 \x01(\fR\x04file\"3\n" +
+	"\x15DownloadRequestSimple\x12\x1a\n" +
+	"\bfilename\x18\x01 \x01(\tR\bfilename2\xf9\x02\n" +
 	"\vFileService\x12C\n" +
 	"\x06Upload\x12\x1a.fileservice.UploadRequest\x1a\x1b.fileservice.UploadResponse(\x01\x12I\n" +
-	"\bDownload\x12\x1c.fileservice.DownloadRequest\x1a\x1d.fileservice.DownloadResponse0\x01B+Z)github.com/zuhrulumam/grpc-file-upload/pbb\x06proto3"
+	"\bDownload\x12\x1c.fileservice.DownloadRequest\x1a\x1d.fileservice.DownloadResponse0\x01\x12d\n" +
+	"\fUploadSimple\x12 .fileservice.UploadRequestSimple\x1a\x1b.fileservice.UploadResponse\"\x15\x82\xd3\xe4\x93\x02\x0f:\x01*\"\n" +
+	"/v1/upload\x12t\n" +
+	"\x0eDownloadSimple\x12\".fileservice.DownloadRequestSimple\x1a\x1d.fileservice.DownloadResponse\"\x1f\x82\xd3\xe4\x93\x02\x19\x12\x17/v1/download/{filename}B+Z)github.com/zuhrulumam/grpc-file-upload/pbb\x06proto3"
 
 var (
 	file_file_proto_rawDescOnce sync.Once
@@ -245,20 +350,26 @@ func file_file_proto_rawDescGZIP() []byte {
 	return file_file_proto_rawDescData
 }
 
-var file_file_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_file_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_file_proto_goTypes = []any{
-	(*UploadRequest)(nil),    // 0: fileservice.UploadRequest
-	(*UploadResponse)(nil),   // 1: fileservice.UploadResponse
-	(*DownloadRequest)(nil),  // 2: fileservice.DownloadRequest
-	(*DownloadResponse)(nil), // 3: fileservice.DownloadResponse
+	(*UploadRequest)(nil),         // 0: fileservice.UploadRequest
+	(*UploadResponse)(nil),        // 1: fileservice.UploadResponse
+	(*DownloadRequest)(nil),       // 2: fileservice.DownloadRequest
+	(*DownloadResponse)(nil),      // 3: fileservice.DownloadResponse
+	(*UploadRequestSimple)(nil),   // 4: fileservice.UploadRequestSimple
+	(*DownloadRequestSimple)(nil), // 5: fileservice.DownloadRequestSimple
 }
 var file_file_proto_depIdxs = []int32{
 	0, // 0: fileservice.FileService.Upload:input_type -> fileservice.UploadRequest
 	2, // 1: fileservice.FileService.Download:input_type -> fileservice.DownloadRequest
-	1, // 2: fileservice.FileService.Upload:output_type -> fileservice.UploadResponse
-	3, // 3: fileservice.FileService.Download:output_type -> fileservice.DownloadResponse
-	2, // [2:4] is the sub-list for method output_type
-	0, // [0:2] is the sub-list for method input_type
+	4, // 2: fileservice.FileService.UploadSimple:input_type -> fileservice.UploadRequestSimple
+	5, // 3: fileservice.FileService.DownloadSimple:input_type -> fileservice.DownloadRequestSimple
+	1, // 4: fileservice.FileService.Upload:output_type -> fileservice.UploadResponse
+	3, // 5: fileservice.FileService.Download:output_type -> fileservice.DownloadResponse
+	1, // 6: fileservice.FileService.UploadSimple:output_type -> fileservice.UploadResponse
+	3, // 7: fileservice.FileService.DownloadSimple:output_type -> fileservice.DownloadResponse
+	4, // [4:8] is the sub-list for method output_type
+	0, // [0:4] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -275,7 +386,7 @@ func file_file_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_file_proto_rawDesc), len(file_file_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

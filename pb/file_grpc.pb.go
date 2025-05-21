@@ -19,8 +19,10 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	FileService_Upload_FullMethodName   = "/fileservice.FileService/Upload"
-	FileService_Download_FullMethodName = "/fileservice.FileService/Download"
+	FileService_Upload_FullMethodName         = "/fileservice.FileService/Upload"
+	FileService_Download_FullMethodName       = "/fileservice.FileService/Download"
+	FileService_UploadSimple_FullMethodName   = "/fileservice.FileService/UploadSimple"
+	FileService_DownloadSimple_FullMethodName = "/fileservice.FileService/DownloadSimple"
 )
 
 // FileServiceClient is the client API for FileService service.
@@ -29,6 +31,9 @@ const (
 type FileServiceClient interface {
 	Upload(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[UploadRequest, UploadResponse], error)
 	Download(ctx context.Context, in *DownloadRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[DownloadResponse], error)
+	// rest
+	UploadSimple(ctx context.Context, in *UploadRequestSimple, opts ...grpc.CallOption) (*UploadResponse, error)
+	DownloadSimple(ctx context.Context, in *DownloadRequestSimple, opts ...grpc.CallOption) (*DownloadResponse, error)
 }
 
 type fileServiceClient struct {
@@ -71,12 +76,35 @@ func (c *fileServiceClient) Download(ctx context.Context, in *DownloadRequest, o
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
 type FileService_DownloadClient = grpc.ServerStreamingClient[DownloadResponse]
 
+func (c *fileServiceClient) UploadSimple(ctx context.Context, in *UploadRequestSimple, opts ...grpc.CallOption) (*UploadResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UploadResponse)
+	err := c.cc.Invoke(ctx, FileService_UploadSimple_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *fileServiceClient) DownloadSimple(ctx context.Context, in *DownloadRequestSimple, opts ...grpc.CallOption) (*DownloadResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DownloadResponse)
+	err := c.cc.Invoke(ctx, FileService_DownloadSimple_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // FileServiceServer is the server API for FileService service.
 // All implementations must embed UnimplementedFileServiceServer
 // for forward compatibility.
 type FileServiceServer interface {
 	Upload(grpc.ClientStreamingServer[UploadRequest, UploadResponse]) error
 	Download(*DownloadRequest, grpc.ServerStreamingServer[DownloadResponse]) error
+	// rest
+	UploadSimple(context.Context, *UploadRequestSimple) (*UploadResponse, error)
+	DownloadSimple(context.Context, *DownloadRequestSimple) (*DownloadResponse, error)
 	mustEmbedUnimplementedFileServiceServer()
 }
 
@@ -92,6 +120,12 @@ func (UnimplementedFileServiceServer) Upload(grpc.ClientStreamingServer[UploadRe
 }
 func (UnimplementedFileServiceServer) Download(*DownloadRequest, grpc.ServerStreamingServer[DownloadResponse]) error {
 	return status.Errorf(codes.Unimplemented, "method Download not implemented")
+}
+func (UnimplementedFileServiceServer) UploadSimple(context.Context, *UploadRequestSimple) (*UploadResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UploadSimple not implemented")
+}
+func (UnimplementedFileServiceServer) DownloadSimple(context.Context, *DownloadRequestSimple) (*DownloadResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DownloadSimple not implemented")
 }
 func (UnimplementedFileServiceServer) mustEmbedUnimplementedFileServiceServer() {}
 func (UnimplementedFileServiceServer) testEmbeddedByValue()                     {}
@@ -132,13 +166,58 @@ func _FileService_Download_Handler(srv interface{}, stream grpc.ServerStream) er
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
 type FileService_DownloadServer = grpc.ServerStreamingServer[DownloadResponse]
 
+func _FileService_UploadSimple_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UploadRequestSimple)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FileServiceServer).UploadSimple(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FileService_UploadSimple_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FileServiceServer).UploadSimple(ctx, req.(*UploadRequestSimple))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FileService_DownloadSimple_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DownloadRequestSimple)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FileServiceServer).DownloadSimple(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FileService_DownloadSimple_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FileServiceServer).DownloadSimple(ctx, req.(*DownloadRequestSimple))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // FileService_ServiceDesc is the grpc.ServiceDesc for FileService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var FileService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "fileservice.FileService",
 	HandlerType: (*FileServiceServer)(nil),
-	Methods:     []grpc.MethodDesc{},
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "UploadSimple",
+			Handler:    _FileService_UploadSimple_Handler,
+		},
+		{
+			MethodName: "DownloadSimple",
+			Handler:    _FileService_DownloadSimple_Handler,
+		},
+	},
 	Streams: []grpc.StreamDesc{
 		{
 			StreamName:    "Upload",

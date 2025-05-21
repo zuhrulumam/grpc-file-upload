@@ -1,1 +1,4 @@
 uploads/*
+downloads/*
+bigfile.bin
+upload.json

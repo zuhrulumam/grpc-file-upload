@@ -4,9 +4,24 @@ package fileservice;
 
 option go_package = "github.com/zuhrulumam/grpc-file-upload/pb";
 
+import "google/api/annotations.proto";
+
 service FileService {
     rpc Upload(stream UploadRequest) returns (UploadResponse);
     rpc Download(DownloadRequest) returns (stream DownloadResponse);
+
+    // rest
+    rpc UploadSimple(UploadRequestSimple) returns (UploadResponse){
+        option (google.api.http) = {
+            post: "/v1/upload"
+            body: "*"
+        };
+    }
+    rpc DownloadSimple(DownloadRequestSimple) returns (DownloadResponse){
+        option (google.api.http) = {
+            get: "/v1/download/{filename}"
+        };
+    }
 }
 
 message UploadRequest {
@@ -25,4 +40,13 @@ message DownloadRequest {
 
 message DownloadResponse {
     bytes chunks = 1;
+}
+
+message UploadRequestSimple {
+  string filename = 1;
+  bytes file = 2;
+}
+
+message DownloadRequestSimple {
+  string filename = 1;
 }
