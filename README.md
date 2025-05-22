@@ -115,7 +115,7 @@ using base64 if chunks are JSON bytes:
 ```bash
 base64 -i bigfile.bin -o base64.txt
 echo '{"filename": "bigfile.bin", "file": "'"$(< base64.txt)"'"}' > upload.json
-url -X POST http://localhost:8080/v1/upload \
+curl -X POST http://localhost:8080/v1/upload \
   -H "Content-Type: application/json" \
   --data-binary @upload.json
 ```
